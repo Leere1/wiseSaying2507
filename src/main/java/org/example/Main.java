@@ -42,13 +42,28 @@ public class Main {
                 }
                 System.out.println(viewText);
                 viewText = "명령) ";
-            }  else if(inputValue.contains("삭제?id=")) {
+            } else if(inputValue.contains("삭제?id=")) {
                 int deleteId = Integer.parseInt(inputValue.substring(6));
                 if(sayings.get(deleteId) != null) {
                     sayings.remove(deleteId);
                     System.out.println(deleteId + "번 명언이 삭제되었습니다.");
                 } else {
                     System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
+                }
+                viewText = "명령) ";
+            } else if(inputValue.contains("수정?id=")) {
+                int changeId = Integer.parseInt(inputValue.substring(6));
+                if(sayings.get(changeId) != null) {
+                    System.out.println("명언(기존) : " + sayings.get(changeId).getText());    // 명언 보여주고
+                    System.out.print("명언 : ");
+                    String changeValueText = sc.nextLine().trim();
+                    System.out.println("작가(기존) : " + sayings.get(changeId).getAuthor());
+                    System.out.print("작가 : ");
+                    String changeValueAuthor = sc.nextLine().trim();
+                    sayings.put(changeId, new wiseSaying(changeId, changeValueText, changeValueAuthor));
+
+                } else {
+                    System.out.println(changeId + "번 명언은 존재하지 않습니다.");
                 }
                 viewText = "명령) ";
             } else if(viewText.equals("명언 : ")) { // 다음 텍스트는 작가 :
